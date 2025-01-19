@@ -18,9 +18,11 @@ def main():
             type = st.selectbox("Scenario Type", ["sales", "customer"],placeholder = "Select Type", index= None)  
             persona_name = st.text_input("Persona Name")
             
+
+        voice_dict = {"Ava":"en-US-AvaMultilingualNeural4", "Andrew" :"en-US-AndrewMultilingualNeural4"}
         with col2:
             image_url = st.text_input("Image URL")
-            voice_id = st.text_input("Voice ID")
+            voice_id = st.selectbox("Voice ID", list(voice_dict.keys()),placeholder = "Select Voice ID", index= None) 
 
         # Persona Description
         persona = st.text_area("AI Persona Description")
@@ -42,7 +44,7 @@ def main():
                 "persona": persona,
                 "persona_name": persona_name,
                 "image_url": image_url,
-                "voice_id": voice_id
+                "voice_id": voice_dict[voice_id]
             }
 
             try:
