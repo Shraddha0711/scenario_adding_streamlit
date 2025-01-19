@@ -15,7 +15,7 @@ def main():
         col1, col2 = st.columns(2)
         with col1:
             name = st.text_input("Scenario Name")
-            type = st.selectbox("Scenario Type", ["sales", "customer"],placeholder = "Select Type", index= None)  # Add your scenario types
+            type = st.selectbox("Scenario Type", ["sales", "customer"],placeholder = "Select Type", index= None)  
             persona_name = st.text_input("Persona Name")
             
         with col2:
@@ -25,17 +25,10 @@ def main():
         # Persona Description
         persona = st.text_area("AI Persona Description")
 
-        # Prompts
-        st.subheader("Prompts")
-        prompt = st.text_area("Main Prompt")
-        
-        col3, col4, col5 = st.columns(3)
-        with col3:
-            easy_prompt = st.text_area("Easy Prompt")
-        with col4:
-            medium_prompt = st.text_area("Medium Prompt")
-        with col5:
-            hard_prompt = st.text_area("Hard Prompt")
+        # Prompt
+        difficulty_level = st.selectbox("Difficulty Level", ["easy", "medium", "hard"],placeholder = "Select Level", index= None)  
+
+        prompt = st.text_area("Prompt")
 
         submitted = st.form_submit_button("Add Scenario")
 
@@ -43,10 +36,8 @@ def main():
             # Prepare data for API request
             params = {
                 "name": name,
+                "difficulty_level": difficulty_level,
                 "prompt": prompt,
-                "easy_prompt": easy_prompt,
-                "medium_prompt": medium_prompt,
-                "hard_prompt": hard_prompt,
                 "type": type,
                 "persona": persona,
                 "persona_name": persona_name,
